@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class UsersController < ApplicationController
+  before_action :authorize_user, only: %i[edit update]
+  before_action :authenticate_user, only: %i[edit update show]
   before_action :set_user, only: %i[show edit update destroy]
 
   def show; end
@@ -37,5 +39,13 @@ class UsersController < ApplicationController
 
   def user_params
     params.require(:user).permit(:email, :password, :password_confirmation)
+  end
+
+  def authorize_user
+    redirect_to root_path, notice: 'You can\'t do that' unless current_user.id == params[:user_id]
+  end
+
+  def authenticate_user
+    redirect_to root_path, notice: 'You can\'t do that' unless current_user
   end
 end
