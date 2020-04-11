@@ -15,6 +15,8 @@ gem 'slim-rails'
 gem 'turbolinks', '~> 5'
 gem 'webpacker', '~> 4.0'
 
+gem 'bcrypt', '~> 3.1'
+
 group :development, :test do
   gem 'brakeman', '~> 4.8.1', require: false
   gem 'bundler-audit'
