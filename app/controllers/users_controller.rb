@@ -1,9 +1,9 @@
 # frozen_string_literal: true
 
 class UsersController < ApplicationController
-  before_action :authorize_user, only: %i[edit update]
+  before_action :authorize_user,    only: %i[edit update]
   before_action :authenticate_user, only: %i[edit update show]
-  before_action :set_user, only: %i[show edit update destroy]
+  before_action :set_user,          only: %i[show edit update destroy]
 
   def show; end
 
@@ -46,6 +46,6 @@ class UsersController < ApplicationController
   end
 
   def authenticate_user
-    redirect_to root_path, notice: 'You can\'t do that' unless current_user
+    redirect_to root_path, notice: 'You must be logged in' unless current_user
   end
 end
