@@ -1,5 +1,7 @@
 h1 = "#{@course.title} course"
 
+p = link_to 'Join this course!', course_participations_path(course)
+
 - if @course.groups.upcoming.any?
   h3 Upcoming groups
   table border=1
