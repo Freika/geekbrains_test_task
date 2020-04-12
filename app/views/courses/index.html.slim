@@ -8,5 +8,5 @@ table border=1
   - @courses.each do |course|
     tr
       td = link_to course.title, course
-      td
-      td
+      td = course.groups.upcoming.first.starts_on
+      td = 0

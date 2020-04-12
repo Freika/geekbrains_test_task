@@ -2,7 +2,7 @@
 
 class CoursesController < ApplicationController
   def index
-    @courses = Course.includes(:groups).page(params[:page])
+    @courses = Course.includes(groups: :participations).page(params[:page])
   end
 
   def show
