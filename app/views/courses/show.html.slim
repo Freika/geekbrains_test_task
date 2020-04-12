@@ -1,2 +1,14 @@
-h1 Courses#show
-p Find me in app/views/courses/show.html.slim
+h1 = "#{@course.title} course"
+
+- if @course.groups.upcoming.any?
+  h3 Upcoming groups
+  table border=1
+    tr
+      th Starts on
+      th Students participating
+    - @course.groups.upcoming.each do |group|
+      tr
+        td = group.starts_on
+        td 0
+- else
+  p There are no upcoming groups for this course

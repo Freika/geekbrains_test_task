@@ -1,2 +1,12 @@
-h1 Courses#index
-p Find me in app/views/courses/index.html.slim
+h1 Courses
+
+table border=1
+  tr
+    th Title
+    th Starts on
+    th Students
+  - @courses.each do |course|
+    tr
+      td = link_to course.title, course
+      td
+      td

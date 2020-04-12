@@ -18,6 +18,12 @@ AllCops:
 Lint/AssignmentInCondition:
   Enabled: false
 
+Lint/RaiseException:
+  Enabled: true
+
+Lint/StructNewOverride:
+  Enabled: false
+
 Style/AndOr:
   Enabled: false
 
