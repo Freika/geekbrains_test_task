@@ -6,3 +6,8 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+
+if Course.none?
+  courses = FactoryBot.create_list(:course, 3)
+  p 'Courses created'
+end
