@@ -9,5 +9,5 @@ Rails.application.routes.draw do
   get 'login',      to: 'sessions#new', as: 'login'
   delete 'logout',  to: 'sessions#destroy', as: 'logout'
 
-  resource :courses, only: %i[index show]
+  resources :courses, only: %i[index show]
 end

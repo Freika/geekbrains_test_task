@@ -2,8 +2,10 @@
 
 class CoursesController < ApplicationController
   def index
-    @courses = Course.page(params[:page])
+    @courses = Course.includes(:groups).page(params[:page])
   end
 
-  def show; end
+  def show
+    @course = Course.includes(:groups).find(params[:id])
+  end
 end

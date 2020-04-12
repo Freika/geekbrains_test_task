@@ -8,6 +8,19 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 if Course.none?
-  courses = FactoryBot.create_list(:course, 3)
-  p 'Courses created'
+  FactoryBot.create_list(:course, 3)
+  p 'Courses were created'
+end
+
+if Group.none?
+  Course.find_each do |course|
+    course.groups.create(
+      [
+        { starts_on: Time.current + 1.day },
+        { starts_on: Time.current + 8.days }
+      ]
+    )
+  end
+
+  p 'Groups for courses were created'
 end

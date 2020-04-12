@@ -7,6 +7,6 @@ table border=1
     th Students
   - @courses.each do |course|
     tr
-      td = course.title
+      td = link_to course.title, course
       td
       td
