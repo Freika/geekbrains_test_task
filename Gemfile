@@ -21,6 +21,7 @@ group :development, :test do
   gem 'brakeman', '~> 4.8.1', require: false
   gem 'bundler-audit'
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
+  gem 'capybara'
   gem 'factory_bot_rails'
   gem 'ffaker'
   gem 'rspec-rails', '~> 4.0.0'
@@ -32,6 +33,7 @@ end
 
 group :development do
   gem 'annotate'
+  gem 'bullet'
   gem 'listen', '>= 3.0.5', '< 3.2'
   gem 'overcommit'
   gem 'web-console', '>= 3.3.0'
@@ -43,9 +45,7 @@ group :test do
   gem 'simplecov-lcov'
 end
 
-gem 'audited', '~> 4.7'
 gem 'dry-container'
 gem 'dry-monads'
-gem 'paranoia', '~> 2.2'
 gem 'will_paginate', '~> 3.1.0'
 gem 'will_paginate-bootstrap4'

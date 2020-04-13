@@ -2,13 +2,25 @@ h1 = "#{@course.title} course"
 
 - if @course.groups.upcoming.any?
   h3 Upcoming groups
-  table border=1
+  table border=0
     tr
       th Starts on
-      th Students participating
+      th colspan=2 Students participating
     - @course.groups.upcoming.each do |group|
       tr
         td = group.starts_on
-        td 0
+        td
+          - if group.participations.any?
+            ul
+              - group.participations.each do |participation|
+                li = participation.user.email
+          - else
+            p N/A
+        td
+          - if group.users.include?(current_user)
+            = link_to 'Leave', course_leave_path(@course, group), method: :delete, data: { confirm: 'Are you sure?' }
+          - else
+            = link_to 'Join', course_join_path(@course, group), method: :post
+
 - else
   p There are no upcoming groups for this course

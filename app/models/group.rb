@@ -2,6 +2,8 @@
 
 class Group < ApplicationRecord
   belongs_to :course
+  has_many :participations
+  has_many :users, through: :participations
 
   validates :starts_on, presence: true
 
