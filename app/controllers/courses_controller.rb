@@ -2,7 +2,12 @@
 
 class CoursesController < ApplicationController
   def index
-    @courses = Course.includes(groups: :participations).page(params[:page])
+    @courses =
+      if params[:filter_by] == 'nearest' || params[:filter_by].nil?
+        Course.nearest.includes(groups: :participations).page(params[:page])
+      else
+        Course.farthest.includes(groups: :participations).page(params[:page])
+      end
   end
 
   def show

@@ -12,6 +12,7 @@
   <body>
     <p>
       <%= link_to 'Home', root_path %>
+      <%= link_to 'Courses', courses_path %>
 
       <% if current_user %>
         Logged in as <%= current_user.email %>

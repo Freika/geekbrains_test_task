@@ -1,40 +1,61 @@
 # frozen_string_literal: true
 
 describe 'Courses', type: :feature do
-  let!(:user) { create(:user, email: 'existing@user.com') }
-  let!(:course) { create(:course) }
-  let!(:group) { create(:group, course: course) }
+  context 'when visiting course' do
+    let!(:user) { create(:user, email: 'existing@user.com') }
+    let!(:course) { create(:course) }
+    let!(:group) { create(:group, course: course) }
 
-  before { sign_in(user) }
+    before { sign_in(user) }
 
-  it 'user can join course group' do
-    join_course(course)
+    it 'user can join course group' do
+      join_course(course)
 
-    expect(page).to have_content('You have successfully joined to this course!')
+      expect(page).to have_content('You have successfully joined to this course!')
+    end
+
+    it 'user can leave course group' do
+      join_course(course)
+
+      visit course_path(course)
+      click_on 'Leave'
+
+      expect(page).to have_content('You successfully left this course :(')
+    end
   end
 
-  it 'user can leave course group' do
-    join_course(course)
+  context 'when sorting courses' do
+    let!(:nearest_course)  { create(:course) }
+    let!(:farthest_course) { create(:course) }
+    let!(:nearest_group)   { create(:group, course: nearest_course, starts_on: 1.day.from_now) }
+    let!(:farthest_group)  { create(:group, course: farthest_course, starts_on: 2.days.from_now) }
 
-    visit course_path(course)
-    click_on 'Leave'
+    it 'by default they are sorted by nearest' do
+      visit courses_path
 
-    expect(page).to have_content('You successfully left this course :(')
-  end
+      first_row = find(:xpath, '//table/tbody/tr/td', match: :first)
 
-  def sign_in(user)
-    visit root_path
-    click_on 'Log In'
+      expect(first_row).to have_content(nearest_course.title)
+    end
 
-    fill_in 'Email',    with: user.email
-    fill_in 'Password', with: user.password
+    it 'by nearest group start' do
+      visit courses_path
 
-    click_button 'Login'
-  end
+      2.times { find('#sort_courses').click }
 
-  def join_course(course)
-    visit root_path
-    click_on course.title
-    click_on 'Join'
+      first_row = find(:xpath, '//table/tbody/tr/td', match: :first)
+
+      expect(first_row).to have_content(nearest_course.title)
+    end
+
+    it 'by farthest group start' do
+      visit courses_path
+
+      find('#sort_courses').click
+
+      first_row = find(:xpath, '//table/tbody/tr/td', match: :first)
+
+      expect(first_row).to have_content(farthest_course.title)
+    end
   end
 end
