@@ -15,6 +15,7 @@ gem 'slim-rails'
 gem 'turbolinks', '~> 5'
 gem 'webpacker', '~> 4.0'
 
+gem 'activeadmin'
 gem 'bcrypt', '~> 3.1'
 
 group :development, :test do
