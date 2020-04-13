@@ -1,20 +1,23 @@
 # frozen_string_literal: true
 
 class Courses::ParticipationsController < ApplicationController
+  before_action :set_course
+
   def create
-    course = Course.find(params[:course_id])
-    group = course.groups.find(params[:id])
+    result = ::ParticipationContainer[:create].call(params[:course_id], params[:group_id], current_user.id)
 
-    success = group.users << current_user
-
-    if success
-      redirect_to course, notice: 'You have successfully joined to this course!'
-    else
-      redirect_to course, notice: 'It seems like you already on this course! Try another group!'
-    end
+    redirect_to @course, notice: result
   end
 
   def destroy
-    @course = Course.includes(:groups).find(params[:id])
+    result = ::ParticipationContainer[:destroy].call(params[:course_id], params[:group_id], current_user.id)
+
+    redirect_to @course, notice: result
+  end
+
+  private
+
+  def set_course
+    @course = Course.find(params[:course_id])
   end
 end
