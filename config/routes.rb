@@ -3,8 +3,8 @@
 Rails.application.routes.draw do
   root to: 'courses#index'
 
-  resources :users, except: %i[index destroy]
-  resources :sessions, only: %i[new create destroy]
+  resources :users,     only: %i[show new create]
+  resources :sessions,  only: %i[new create destroy]
 
   get     'signup', to: 'users#new',        as: 'signup'
   get     'login',  to: 'sessions#new',     as: 'login'

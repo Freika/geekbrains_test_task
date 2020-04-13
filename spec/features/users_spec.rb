@@ -3,7 +3,7 @@
 describe 'Users', type: :feature do
   let!(:user) { create(:user, email: 'existing@user.com') }
 
-  context 'when signing up' do
+  context 'when not registered' do
     let(:user_params) { { email: FFaker::Internet.email, password: '00000000' } }
 
     it 'can create a new user' do
@@ -31,7 +31,7 @@ describe 'Users', type: :feature do
     end
   end
 
-  context 'when signing in' do
+  context 'when registered' do
     it 'can successfully sign in' do
       visit root_path
       click_on 'Log In'
@@ -66,6 +66,20 @@ describe 'Users', type: :feature do
       click_button 'Login'
 
       expect(page).to have_content('Email or password is invalid')
+    end
+
+    it 'can sign out' do
+      visit root_path
+      click_on 'Log In'
+
+      fill_in 'Email',    with: user.email
+      fill_in 'Password', with: user.password
+
+      click_button 'Login'
+      click_on 'Log Out'
+
+      expect(page).not_to have_content("Logged in as #{user.email}")
+      expect(page).to have_content('Logged out!')
     end
   end
 end
