@@ -21,6 +21,7 @@ group :development, :test do
   gem 'brakeman', '~> 4.8.1', require: false
   gem 'bundler-audit'
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
+  gem 'capybara'
   gem 'factory_bot_rails'
   gem 'ffaker'
   gem 'rspec-rails', '~> 4.0.0'
