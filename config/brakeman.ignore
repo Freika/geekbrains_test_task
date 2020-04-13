@@ -1,0 +1,25 @@
+{
+  "ignored_warnings": [
+    {
+      "warning_type": "Basic Auth",
+      "warning_code": 9,
+      "fingerprint": "e114a2d0b3a6876d6b26dc263e63fd18df2f4f8fd0dbbea3b844ba750a52bb2e",
+      "check_name": "BasicAuth",
+      "message": "Basic authentication password stored in source code",
+      "file": "app/controllers/application_controller.rb",
+      "line": 5,
+      "link": "https://brakemanscanner.org/docs/warning_types/basic_auth/",
+      "code": "http_basic_authenticate_with(:name => \"admin\", :password => \"admin\", :if => :admin_controller?)",
+      "render_path": null,
+      "location": {
+        "type": "controller",
+        "controller": "ApplicationController"
+      },
+      "user_input": null,
+      "confidence": "High",
+      "note": "This is a test task so we won't be messing around with ENV vars."
+    }
+  ],
+  "updated": "2020-04-13 18:16:34 +0300",
+  "brakeman_version": "4.8.1"
+}
