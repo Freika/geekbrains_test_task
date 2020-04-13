@@ -6,6 +6,6 @@ class CoursesController < ApplicationController
   end
 
   def show
-    @course = Course.includes(:groups).find(params[:id])
+    @course = Course.includes(groups: :users).find(params[:id])
   end
 end

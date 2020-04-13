@@ -9,4 +9,4 @@ table border=1
     tr
       td = link_to course.title, course
       td = course.groups.upcoming.first.starts_on
-      td = 0
+      td = participants_number(course)
