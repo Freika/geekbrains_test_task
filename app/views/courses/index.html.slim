@@ -3,10 +3,11 @@ h1 Courses
 table border=1
   tr
     th Title
-    th Starts on
+    th = ordering_link(params[:filter_by])
     th Students
-  - @courses.each do |course|
-    tr
-      td = link_to course.title, course
-      td = beginning_date(course)
-      td = participants_number(course)
+  tbody
+    - @courses.each do |course|
+      tr
+        td = link_to course.title, course
+        td = beginning_date(course)
+        td = participants_number(course)
