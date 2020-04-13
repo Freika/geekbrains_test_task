@@ -3,7 +3,7 @@
 class Participations::Create
   def call(course, group_id, user_id)
     group = course.groups.find_by(id: group_id)
-    return group_not_found unless group
+    return 'Group not found' unless group
 
     participation = Participation.create(group_id: group_id, user_id: user_id)
 
@@ -14,9 +14,5 @@ class Participations::Create
 
   def success_message
     'You have successfully joined to this course!'
-  end
-
-  def group_not_found
-    'Group not found'
   end
 end
