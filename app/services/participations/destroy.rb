@@ -1,11 +1,11 @@
 # frozen_string_literal: true
 
 class Participations::Destroy
-  def call(course_id, group_id, user_id)
-    course = Course.find_by(id: course_id)
-    return course_not_found unless course
+  def call(course, group_id, user_id)
+    group = course.groups.find_by(id: group_id)
+    return group_not_found unless group
 
-    participation = Participation.find_by(group_id: group_id, user_id: user_id)
+    participation = group.participations.find_by(group_id: group_id, user_id: user_id)
     return failure_message unless participation
 
     participation.destroy
@@ -23,7 +23,7 @@ class Participations::Destroy
     'You are not on this course so you can not leave it!'
   end
 
-  def course_not_found
-    'Course not found'
+  def group_not_found
+    'Group not found'
   end
 end

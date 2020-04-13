@@ -10,11 +10,11 @@ describe Participations::Destroy do
     let!(:success_message) { 'You successfully left this course :(' }
 
     it 'deletes a participation' do
-      expect { described_class.new.call(course.id, group.id, user.id) }.to change(Participation, :count).by(-1)
+      expect { described_class.new.call(course, group.id, user.id) }.to change(Participation, :count).by(-1)
     end
 
     it 'returns success message' do
-      result = described_class.new.call(course.id, group.id, user.id)
+      result = described_class.new.call(course, group.id, user.id)
 
       expect(result).to eq(success_message)
     end
@@ -25,25 +25,25 @@ describe Participations::Destroy do
 
     it 'does not delete a participation' do
       expect do
-        described_class.new.call(course.id, group.id, user.id)
+        described_class.new.call(course, group.id, user.id)
       end.to change(Participation, :count).by(0)
     end
 
     it 'returns failure message' do
-      result = described_class.new.call(course.id, group.id, user.id)
+      result = described_class.new.call(course, group.id, user.id)
 
       expect(result).to eq(failure_message)
     end
 
-    context 'when course not found' do
-      let(:course_not_found_message) { 'Course not found' }
+    context 'when group not found' do
+      let(:group_not_found_message) { 'Group not found' }
 
-      it 'returns course_not_found_message' do
-        course.destroy
+      it 'returns group_not_found_message' do
+        group.destroy
 
-        result = described_class.new.call(course.id, group.id, user.id)
+        result = described_class.new.call(course, group.id, user.id)
 
-        expect(result).to eq(course_not_found_message)
+        expect(result).to eq(group_not_found_message)
       end
     end
   end

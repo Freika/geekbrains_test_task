@@ -10,12 +10,12 @@ describe Participations::Create do
 
     it 'creates a participation' do
       expect do
-        described_class.new.call(course.id, group.id, user.id)
+        described_class.new.call(course, group.id, user.id)
       end.to change(Participation, :count).by(1)
     end
 
     it 'returns success message' do
-      result = described_class.new.call(course.id, group.id, user.id)
+      result = described_class.new.call(course, group.id, user.id)
 
       expect(result).to eq(success_message)
     end
@@ -29,31 +29,21 @@ describe Participations::Create do
 
     it 'does not create participation' do
       expect do
-        described_class.new.call(course.id, group.id, user.id)
+        described_class.new.call(course, group.id, user.id)
       end.to change(Participation, :count).by(0)
     end
 
     it 'returns failure message' do
-      result = described_class.new.call(course.id, group.id, user.id)
+      result = described_class.new.call(course, group.id, user.id)
 
       expect(result).to eq(failure_message)
-    end
-
-    context 'when course is gone' do
-      it 'returns course not found message' do
-        course.destroy
-
-        result = described_class.new.call(course.id, group.id, user.id)
-
-        expect(result).to eq(course_not_found_message)
-      end
     end
 
     context 'when group is gone' do
       it 'returns group not found message' do
         group.destroy
 
-        result = described_class.new.call(course.id, group.id, user.id)
+        result = described_class.new.call(course, group.id, user.id)
 
         expect(result).to eq(group_not_found_message)
       end
