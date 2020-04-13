@@ -7,17 +7,13 @@ class Participations::Create
 
     participation = Participation.create(group_id: group_id, user_id: user_id)
 
-    participation.persisted? ? success_message : failure_message
+    participation.persisted? ? success_message : participation.errors.full_messages.join(', ')
   end
 
   private
 
   def success_message
     'You have successfully joined to this course!'
-  end
-
-  def failure_message
-    'It seems like you already on this course! Try another group!'
   end
 
   def group_not_found

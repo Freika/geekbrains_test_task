@@ -23,9 +23,8 @@ describe Participations::Create do
 
   context 'when failure' do
     let!(:participation)  { create(:participation, user: user, group: group) }
-    let(:failure_message) { 'It seems like you already on this course! Try another group!' }
+    let(:failure_message) { 'User has already been taken' }
     let(:group_not_found_message) { 'Group not found' }
-    let(:course_not_found_message) { 'Course not found' }
 
     it 'does not create participation' do
       expect do
