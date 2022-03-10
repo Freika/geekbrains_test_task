@@ -19,7 +19,7 @@ Given by GeekBrains HR.
 
 ## Dependencies
 
-- Ruby 2.6.5
+- Ruby 2.6.9
 - PostgreSQL 10
 
 ## Run locally
